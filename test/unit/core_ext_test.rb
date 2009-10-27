@@ -31,5 +31,19 @@ class CoreExtTest < Test::Unit::TestCase
     should "also take care of symbols" do
       assert_equal "other;test", [:other, :test].as_rfc2425
     end
+    
+    should "accept :delimiter option" do
+      assert_equal "home,work", [:home, :work].as_rfc2425(:delimiter => ',')
+    end
+  end
+  
+  context "HashSupport" do
+    should "convert to simple key1=value1;keyN=valueN string, always sorted by key name" do
+      assert_equal "language=de;type=work", { :type => 'work', :language => :de }.as_rfc2425
+    end
+    
+    should "handle inner arrays slightly differnt, using , as delimiter" do
+      assert_equal "type=work,home", { :type => %w{work home} }.as_rfc2425
+    end
   end
 end
