@@ -3,7 +3,7 @@ require 'rake/testtask'
 require 'yard'
 
 def rfc2425_version
-  @rfc2425_version ||= (tmp = YAML.load(File.read('VERSION.yml'))) && [tmp[:major], tmp[:minor], tmp[:patch]] * '.'
+  @rfc2425_version ||= (vers = YAML.load(File.read('VERSION.yml'))) && [vers[:major], vers[:minor], vers[:patch]] * '.'
 end
 
 def rfc2425_revision
