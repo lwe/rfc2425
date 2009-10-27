@@ -6,5 +6,10 @@ module Rfc2425
       str
     end
     module_function :namerize
+    
+    def escape(str)
+      str.to_s.gsub(/([,;:\\])/, '\\\\\1').gsub(/\r?\n/, '\n')
+    end
+    module_function :escape
   end
 end
