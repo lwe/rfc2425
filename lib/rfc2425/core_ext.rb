@@ -2,7 +2,7 @@ module Rfc2425
   module CoreExt
     module ObjectSupport
       def as_rfc2425
-        Rfc2425::Utils.escape(to_s)
+        Rfc2425::Utils.escape(self)
       end
     end
     
