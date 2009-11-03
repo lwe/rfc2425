@@ -18,7 +18,14 @@ class BuilderTest < Test::Unit::TestCase
         d.email(:type => :work) << 'peter.gibbons@initech.org'        
       end
       
-      assert_equal "BEGIN:VCARD\nVERSION:3.0\nFN:Peter Gibbons\nN:Gibbons;Peter\nORG:Initech Corp.\nEMAIL;type=work:peter.gibbons@initech.org\nEND:VCARD", di.to_s
+      exp = %Q{BEGIN:VCARD
+VERSION:3.0
+FN:Peter Gibbons
+N:Gibbons;Peter
+ORG:Initech Corp.
+EMAIL;type=work:peter.gibbons@initech.org
+END:VCARD}
+      assert_equal exp, di.to_s
     end
     
     should "allow adding multiple attributes with the same name" do
@@ -28,7 +35,12 @@ class BuilderTest < Test::Unit::TestCase
         d.some(:language => :de, :value => :test) << "Attribut"
       end
       
-      assert_equal "BEGIN\nNAME:Peter Gibbons\nSOME:attribute\nSOME;language=de;value=test:Attribut\nEND", di.to_s
+      exp = %Q{BEGIN
+NAME:Peter Gibbons
+SOME:attribute
+SOME;language=de;value=test:Attribut
+END}
+      assert_equal exp, di.to_s
     end
     
     should "override value if set using =" do
