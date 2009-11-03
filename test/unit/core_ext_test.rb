@@ -30,11 +30,7 @@ class CoreExtTest < Test::Unit::TestCase
     
     should "also take care of symbols" do
       assert_equal "other;test", [:other, :test].as_rfc2425
-    end
-    
-    should "accept :delimiter option" do
-      assert_equal "home,work", [:home, :work].as_rfc2425(:delimiter => ',')
-    end
+    end    
   end
   
   context "HashSupport" do
