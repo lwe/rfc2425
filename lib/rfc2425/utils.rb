@@ -19,5 +19,11 @@ module Rfc2425
       str.to_s.gsub(/([,;:\\])/, '\\\\\1').gsub(/\r?\n/, '\n')
     end
     module_function :escape
+    
+    # Split lines longer than +length+ with +delim+.
+    def split_lines(str, length = 79, delim = "\n\t")
+      str.to_s.scan(/.{#{length}}/).join(delim)
+    end
+    module_function :split_lines
   end
 end
