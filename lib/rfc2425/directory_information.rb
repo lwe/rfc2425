@@ -29,6 +29,11 @@ module Rfc2425
     def to_s
       profile_str = profile ? ":#{profile.to_s.upcase}" : ""
       "BEGIN#{profile_str}\n" << super << "\nEND#{profile_str}"
+    end
+    
+    # Allow compatibility with Rails' +send_data+.
+    def bytesize
+      (str = to_s).respond_to?(:bytesize) ? str.bytesize : str.length
     end    
   end
 end
