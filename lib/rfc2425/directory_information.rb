@@ -25,7 +25,7 @@ module Rfc2425
       properties.each { |k,v| self << Property.new(k, v) }
       yield self if block_given?
     end
-            
+    
     def to_s
       profile_str = profile ? ":#{profile.to_s.upcase}" : ""
       "BEGIN#{profile_str}\n" << super << "\nEND#{profile_str}"
