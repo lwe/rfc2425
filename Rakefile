@@ -42,6 +42,7 @@ begin
     gemspec.extra_rdoc_files = %w{README.md}
     gemspec.add_development_dependency "thoughtbot-shoulda", ">= 0"
     gemspec.add_development_dependency "rr", ">= 0"
+    gemspec.add_development_dependency "activesupport", ">= 2.3.0"
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
