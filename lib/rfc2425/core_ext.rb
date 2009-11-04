@@ -18,9 +18,27 @@ module Rfc2425
         map { |k, v| "#{k}=#{v.is_a?(Array) ? v.as_rfc2425_with_delim(',') : v.as_rfc2425}" }.sort.join(';')
       end
     end
+    
+    module TimeSupport
+      def as_rfc2425
+        getutc.strftime('%Y%m%dT%H%M%SZ')
+      end
+    end
+    
+    module DateSupport
+      def as_rfc2425
+        strftime('%Y-%m-%d')
+      end
+    end
   end
 end
 
 ::Object.send(:include, Rfc2425::CoreExt::ObjectSupport)
 ::Array.send(:include, Rfc2425::CoreExt::ArraySupport)
 ::Hash.send(:include, Rfc2425::CoreExt::HashSupport)
+::Time.send(:include, Rfc2425::CoreExt::TimeSupport)
+
+# setup ActiveSupport time formats
+::DateTime.send(:include, Rfc2425::CoreExt::TimeSupport) if defined?(::DateTime)
+::Date.send(:include, Rfc2425::CoreExt::DateSupport) if defined?(::Date)
+::ActiveSupport::TimeWithZone.send(:include, Rfc2425::CoreExt::TimeSupport) if defined?(::ActiveSupport)
